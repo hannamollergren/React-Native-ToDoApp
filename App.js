@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, FlatList} from 'react-native';
+import AddToDo from './components/addToDo';
 import Header from "./components/header";
 import ToDoItem from "./components/toDoItem";
 
@@ -16,13 +17,22 @@ export default function App() {
 		})
 	}
 
+	const submitHandler = (text) => {
+		setTodos((prevToDos) => {
+			return [
+				{text: text, key: Math.random().toString()},
+				...prevToDos
+			]
+		})
+	}
+
 
 
 	return (
 		<View style={styles.container}>
 			<Header/>
 			<View style={styles.content}>
-				{/*TO DO FORM*/}
+				<AddToDo submitHandler={submitHandler}/>
 				<View style={styles.list}>
 					<FlatList 
 						data={todos}
